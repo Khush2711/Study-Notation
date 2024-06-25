@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import logo from '../assets/Logo.svg'
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function Navbar({ isLoggedin, setIsLoggedin }) {
 
-    function LoginHandler()
-    {
+    function LoginHandler() {
         setIsLoggedin(!isLoggedin);
+        if (!isLoggedin) toast.success("Logged in");
+        else toast.success("Logged out");
     }
 
     return (
-        <div className="flex bg-blue-500 justify-evenly p-2">
+        <div className="flex justify-between pt-4 px-20">
 
             <div className="">
                 <Link to='/'>
@@ -20,43 +22,37 @@ function Navbar({ isLoggedin, setIsLoggedin }) {
 
 
             <div className="">
-                <ui className="flex gap-2">
+                <ul className="flex gap-8">
                     <Link to='/' className="">Home</Link>
                     <Link to='/' className="">About</Link>
                     <Link to='/' className="">Contact</Link>
-                </ui>
+                </ul>
             </div>
 
-            <div className="flex gap-4 w-[20%] ml-5">
+            <div className="">
 
                 {
                     !isLoggedin ?
-                        <>
+                        <div className="flex gap-4">
                             <Link to="/login">
-                                <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border border-richblack-700" onClick={LoginHandler}>Login</button>
+                                <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border border-richblack-700 w-full" onClick={LoginHandler}>Login</button>
                             </Link>
 
                             <Link to="/signup">
-                                <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border border-richblack-700">sign Up</button>
+                                <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border border-richblack-700 w-full">sign Up</button>
                             </Link>
-                        </>
+                        </div>
                         :
-                        <>
+                        <div className="flex gap-4">
                             <Link to="/">
-                                <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border border-richblack-700" onClick={LoginHandler}>Log Out</button>
+                                <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border border-richblack-700 w-full" onClick={LoginHandler}>Log Out</button>
                             </Link>
 
                             <Link to="/dashboard">
-                                <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border border-richblack-700">Dashboard</button>
+                                <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border border-richblack-700 w-full">Dashboard</button>
                             </Link>
-                        </>
+                        </div>
                 }
-
-
-
-
-
-
             </div>
 
         </div>
